@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import AuthService from "../../services/auth.service";
 import {
   Alert,
   Dimensions,
@@ -16,17 +17,30 @@ import FromField from "../../components/FromField";
 import CustomButton from "../../components/CustomButton";
 export default function SignIn() {
   const [isSubmitting, setSubmitting] = useState(false);
+  // const []
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const submit = () => {
+  const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Hãy điền tất cả");
     }
     setSubmitting(true);
-    console.log(form);
+    try {
+      const result = await AuthService.login(form);
+      console.log(result.data);
+      if(result.status === 200){
+        Alert.alert("Đăng nhập thành công");
+      }else{
+        Alert.alert(result.data);
+      }
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
