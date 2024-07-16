@@ -21,6 +21,8 @@ import like from "../assets/icons/icon-like.png";
 import view from "../assets/icons/icon-view.png";
 import fllow from "../assets/icons/icon-follow.png";
 import mess from "../assets/icons/icon-mess.png";
+import messColor from "../assets/icons/icon-chat-color.png";
+import load from "../assets/icons/icon-load.png";
 
 export default {
   eye,
@@ -46,4 +48,6 @@ export default {
   view,
   fllow,
   mess,
+  load,
+  messColor,
 };

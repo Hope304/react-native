@@ -14,6 +14,7 @@ export default function FromField({
   placeholder,
   handleChangeText,
   otherStyles,
+  validate,
   ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,6 +52,7 @@ export default function FromField({
           </TouchableOpacity>
         )}
       </View>
+      <Text style={styles.validate}>{validate}</Text>
     </View>
   );
 }
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Medium",
   },
   mainForm: {
+    marginBottom: 20,
     width: "100%",
     height: 60,
     paddingHorizontal: 20,
@@ -84,5 +87,13 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     resizeMode: "contain",
+  },
+  validate: {
+    position: "absolute",
+    fontFamily: "Poppins-Medium",
+    color: "red",
+    fontSize: 13,
+    bottom: -10,
+    right: 0,
   },
 });

@@ -1,5 +1,11 @@
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { COLOR } from "../constants";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  ActivityIndicator,
+} from "react-native";
+import { COLOR, icons } from "../constants";
 import React from "react";
 
 export default function CustomButton({
@@ -20,7 +26,11 @@ export default function CustomButton({
       ]}
       disabled={isLoading}
     >
-      <Text style={[styles.text, textStyles]}>{title}</Text>
+      {isLoading ? (
+        <ActivityIndicator size={"large"} color={COLOR.bg} />
+      ) : (
+        <Text style={[styles.text, textStyles]}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 }

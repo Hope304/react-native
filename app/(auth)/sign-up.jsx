@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Alert,
@@ -14,19 +14,37 @@ import { COLOR, images } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FromField from "../../components/FromField";
 import CustomButton from "../../components/CustomButton";
+import AuthService from "../../services/auth.service";
 export default function SignUp() {
   const [isSubmitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({
+  const [validate, setValidate] = useState({
+    userName: "",
     email: "",
     password: "",
+    confirm: "",
+  });
+  const [form, setForm] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirm: "",
   });
 
-  const submit = () => {
-    if (form.email === "" || form.password === "") {
-      Alert.alert("Error", "Hãy điền tất cả");
-    }
+  const submit = async () => {
     setSubmitting(true);
-    console.log(form);
+    try {
+      const result = await AuthService.signup(form);
+      console.log(result.data);
+      if (result.status === 200) {
+        router.push("/sign-in");
+      } else if (result.status === 201) {
+        setValidate(result.data.error);
+      }
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -37,23 +55,39 @@ export default function SignUp() {
           <FromField
             title="Username"
             value={form.userName}
-            handleChangeText={(e) => setForm({ ...form, userName: e })}
+            handleChangeText={(e) => {
+              setForm({ ...form, userName: e });
+              setValidate({ ...validate, userName: "" });
+            }}
+            validate={validate.userName}
           />
           <FromField
             title="Email"
             value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            handleChangeText={(e) => {
+              setForm({ ...form, email: e });
+              setValidate({ ...validate, email: "" });
+            }}
             keyboardType="email-address"
+            validate={validate.email}
           />
           <FromField
             title="Password"
             value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
+            handleChangeText={(e) => {
+              setForm({ ...form, password: e });
+              setValidate({ ...validate, password: "" });
+            }}
+            validate={validate.password}
           />
           <FromField
             title="Confirm Password"
             value={form.confirm}
-            handleChangeText={(e) => setForm({ ...form, confirm: e })}
+            handleChangeText={(e) => {
+              setForm({ ...form, confirm: e });
+              setValidate({ ...validate, confirm: "" });
+            }}
+            validate={validate.confirm}
           />
           <LinearGradient
             colors={["#F68464", "#EEA849"]}
