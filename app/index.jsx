@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    maxWidth: 340,
+    maxWidth: 300,
     width: "100%",
-    height: 330,
+    height: 300,
     resizeMode: "contain",
   },
   text: {

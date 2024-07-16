@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Alert,
@@ -27,6 +27,7 @@ export default function SignIn() {
     }
     setSubmitting(true);
     console.log(form);
+    router.push("/home");
   };
 
   return (
