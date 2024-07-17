@@ -23,6 +23,8 @@ import fllow from "../assets/icons/icon-follow.png";
 import mess from "../assets/icons/icon-mess.png";
 import messColor from "../assets/icons/icon-chat-color.png";
 import load from "../assets/icons/icon-load.png";
+import logout from "../assets/icons/logout.png";
+import setting from "../assets/icons/Settings.png";
 
 export default {
   eye,
@@ -50,4 +52,6 @@ export default {
   mess,
   load,
   messColor,
+  logout,
+  setting,
 };

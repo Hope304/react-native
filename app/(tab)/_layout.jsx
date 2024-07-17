@@ -1,8 +1,8 @@
 import { Redirect, Stack, Tabs } from "expo-router";
-import React from "react";
+import React, { useRef } from "react";
 import { COLOR, icons } from "../../constants";
 import { Loader } from "../../components/Loader";
-import { View, Image, StyleSheet, StatusBar } from "react-native";
+import { View, Image, StyleSheet, StatusBar, Animated } from "react-native";
 import { useGlobalContext } from "../../contexts/GlobalProvider";
 import { LinearGradient } from "expo-linear-gradient";
 
